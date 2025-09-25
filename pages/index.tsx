@@ -1,6 +1,4 @@
-// app/page.tsx
-"use client";
-
+// pages/index.tsx
 import React, { useEffect, useState } from "react";
 
 function EmailForm({ cta = "Join Thousands of Creators" }: { cta?: string }) {
@@ -10,10 +8,7 @@ function EmailForm({ cta = "Join Thousands of Creators" }: { cta?: string }) {
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     if (!email) return;
-    // TODO: send `email` to your backend / waitlist API
-    // e.g., await fetch("/api/waitlist", { method: "POST", body: JSON.stringify({ email }) });
     console.log("Email submitted:", email);
-
     setToast("Thanks! We'll notify you when we launch.");
     setEmail("");
   };
@@ -59,7 +54,7 @@ function EmailForm({ cta = "Join Thousands of Creators" }: { cta?: string }) {
   );
 }
 
-export default function Page() {
+export default function Home() {
   // header background on scroll
   useEffect(() => {
     const header = document.querySelector<HTMLElement>(".header");
@@ -93,10 +88,9 @@ export default function Page() {
             </h1>
             <p className="hero-subtitle">
               Paste your Substack URL and instantly generate platform-optimized
-              content for Twitter, Instagram, and LinkedIn. Each piece ends with
-              a powerful call-to-action designed to grow your subscriber base.
+              content for X, Instagram, and LinkedIn. Each piece ends with a
+              powerful call-to-action designed to grow your subscriber base.
             </p>
-
             <div className="hero-cta">
               <EmailForm cta="Join Thousands of Creators" />
             </div>
@@ -113,27 +107,22 @@ export default function Page() {
               <h3 className="benefit-title">Instant Optimization</h3>
               <p className="benefit-description">
                 Paste your Substack URL and get platform-specific content in
-                seconds. No more spending hours adapting your posts for
-                different social platforms.
+                seconds.
               </p>
             </div>
-
             <div className="benefit-card">
               <div className="benefit-icon">📊</div>
               <h3 className="benefit-title">Smart Analytics</h3>
               <p className="benefit-description">
                 See which content variations perform best across platforms.
-                Track engagement, clicks and most importantly — new subscribers.
               </p>
             </div>
-
             <div className="benefit-card">
               <div className="benefit-icon">🎯</div>
               <h3 className="benefit-title">Conversion-Ready CTAs</h3>
               <p className="benefit-description">
                 Every piece ends with a subscriber-focused call-to-action that
-                actually converts. Stop losing potential subscribers to weak
-                endings.
+                converts.
               </p>
             </div>
           </div>
@@ -145,8 +134,8 @@ export default function Page() {
           <div className="cta-content">
             <h2 className="cta-title">Ready to Grow Your Subscriber Base?</h2>
             <p className="cta-subtitle">
-              Join thousands of newsletter creators who are already growing
-              faster with Stack2Subs
+              Join thousands of newsletter creators already growing faster with
+              Stack2Subs
             </p>
             <EmailForm cta="Get Early Access" />
           </div>
