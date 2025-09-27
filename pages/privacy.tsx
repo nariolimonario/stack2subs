@@ -20,8 +20,8 @@ export default function Privacy() {
       </p>
 
       <p>
-        Stack2Subs ("we", "us", or "our") respects your privacy and is committed
-        to protecting your personal data.
+        Stack2Subs (&quot;we&quot;, &quot;us&quot; or &quot;our&quot;) respects
+        your privacy and is committed to protecting your personal data.
       </p>
 
       <h2>1. Information We Collect</h2>

@@ -2,6 +2,7 @@
 import type { AppProps } from "next/app";
 import Head from "next/head"; // 👈 import Head
 import "../styles/globals.css";
+import Link from "next/link"; // add this at the top
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -23,19 +24,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <Component {...pageProps} />
-      <footer
-        className="footer"
-        style={{
-          textAlign: "center",
-          padding: "1rem",
-          borderTop: "1px solid #eee",
-          marginTop: "2rem",
-          fontSize: "0.9rem",
-        }}
-      >
-        <p>© {new Date().getFullYear()} Stack2Subs</p>
+      <footer className="footer">
+        <p>© 2025 Stack2Subs</p>
         <p>
-          <a href="/privacy">Privacy Policy</a> |{" "}
+          <Link href="/privacy">Privacy Policy</Link> |{" "}
           <a href="mailto:stack2subs@gmail.com">Contact</a>
         </p>
       </footer>
