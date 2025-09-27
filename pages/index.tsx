@@ -33,8 +33,8 @@ function EmailForm({ cta = "Join Thousands of Creators" }: { cta?: string }) {
         .insert([{ email: value, referer, user_agent, source: cta }]);
 
       if (error) {
-        // 23505 = unique_violation in Postgres (already subscribed)
-        if ((error as any).code === "23505") {
+        const msg = (error.message || "").toLowerCase();
+        if (msg.includes("duplicate") || msg.includes("unique constraint")) {
           setToast("You're already on the list. ❤️");
         } else {
           console.error(error);
