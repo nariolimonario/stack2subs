@@ -255,3 +255,13 @@ body {
     font-size: 2rem;
   }
 }
+
+/* Footer links */
+.footer a {
+  color: inherit; /* take the same color as parent text */
+  text-decoration: none; /* remove underline */
+}
+
+.footer a:hover {
+  text-decoration: underline; /* optional hover effect */
+}
