@@ -1,16 +1,55 @@
 // pages/index.tsx
 import React, { useEffect, useState } from "react";
+import { supabase } from "../lib/supabaseClient";
 
 function EmailForm({ cta = "Join Thousands of Creators" }: { cta?: string }) {
   const [email, setEmail] = useState("");
   const [toast, setToast] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const onSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    if (!email) return;
-    console.log("Email submitted:", email);
-    setToast("Thanks! We'll notify you when we launch.");
-    setEmail("");
+    if (loading) return;
+
+    const value = email.trim().toLowerCase();
+    if (!EMAIL_RE.test(value)) {
+      setToast("Please enter a valid email.");
+      return;
+    }
+
+    setLoading(true);
+    setToast(null);
+
+    const referer =
+      typeof document !== "undefined" ? document.referrer || null : null;
+    const user_agent =
+      typeof navigator !== "undefined" ? navigator.userAgent : null;
+
+    try {
+      const { error } = await supabase
+        .from("subscribers")
+        .insert([{ email: value, referer, user_agent, source: cta }]);
+
+      if (error) {
+        // 23505 = unique_violation in Postgres (already subscribed)
+        if ((error as any).code === "23505") {
+          setToast("You're already on the list. ❤️");
+        } else {
+          console.error(error);
+          setToast("Something went wrong. Please try again.");
+        }
+      } else {
+        setToast("Thanks! We'll notify you when we launch.");
+        setEmail("");
+      }
+    } catch (err) {
+      console.error(err);
+      setToast("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -30,9 +69,11 @@ function EmailForm({ cta = "Join Thousands of Creators" }: { cta?: string }) {
             placeholder="Enter your email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            disabled={loading}
+            aria-label="Email address"
           />
-          <button type="submit" className="cta-button">
-            {cta}
+          <button type="submit" className="cta-button" disabled={loading}>
+            {loading ? "Joining…" : cta}
           </button>
         </div>
       </form>
