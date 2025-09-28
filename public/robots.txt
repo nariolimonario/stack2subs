@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://stack2subs.com
+
+# Sitemaps
+Sitemap: https://stack2subs.com/sitemap.xml
