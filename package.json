@@ -12,7 +12,10 @@
     "postbuild": "next-sitemap"
   },
   "dependencies": {
+    "@mozilla/readability": "^0.6.0",
     "@supabase/supabase-js": "^2.58.0",
+    "html-to-text": "^9.0.5",
+    "jsdom": "^27.0.0",
     "next": "15.5.4",
     "next-sitemap": "^4.2.3",
     "react": "19.1.0",
@@ -22,6 +25,8 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/html-to-text": "^9.0.4",
+    "@types/jsdom": "^27.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
